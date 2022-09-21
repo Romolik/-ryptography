@@ -9,10 +9,7 @@ public class DiffieHellman {
     private Integer z;
 
     public DiffieHellman() {
-        Multiplier multiplier = new Multiplier();
-        yA = multiplier.multiply(Long.valueOf(g), xA, p);
-        yB = multiplier.multiply(Long.valueOf(g), xB, p);
-        z = multiplier.multiply(Long.valueOf(yB), xA, p);
+        calculateKeys();
     }
 
     public Integer getYa() {
@@ -25,5 +22,31 @@ public class DiffieHellman {
 
     public Integer getZ() {
         return z;
+    }
+
+    //for test
+    public void setXa(Integer x) {
+        xA = x;
+    }
+
+    //for test
+    public void setXb(Integer x) {
+        xB = x;
+    }
+
+    //for test
+    public void setP(Integer p) {
+        this.p = p;
+    }
+
+    public void setG(Integer g) {
+        this.g = g;
+    }
+
+    public void calculateKeys() {
+        Multiplier multiplier = new Multiplier();
+        yA = multiplier.multiply(Long.valueOf(g), xA, p);
+        yB = multiplier.multiply(Long.valueOf(g), xB, p);
+        z = multiplier.multiply(Long.valueOf(yB), xA, p);
     }
 }
