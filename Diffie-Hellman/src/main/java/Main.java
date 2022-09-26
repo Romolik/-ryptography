@@ -1,14 +1,23 @@
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Multiplier multiplier = new Multiplier();
-        System.out.println("3^11 mod 19 = " + multiplier.multiply(3L, 11, 19));
-        DiffieHellman diffieHellman = new DiffieHellman();
-        diffieHellman.setXa(3);
-        diffieHellman.setXb(4);
-        diffieHellman.setP(23);
-        diffieHellman.setG(2);
-        diffieHellman.calculateKeys();
-        System.out.println("Ya = " + diffieHellman.getYa() + ", Yb = " + diffieHellman.getYb() +
-                ",Zab = " + diffieHellman.getZ());
+        ShamirProtocol shamirProtocol = new ShamirProtocol();
+        Scanner in = new Scanner(System.in);
+        
+        System.out.println("Введите m: ");
+        try {
+            Integer m = in.nextInt();
+            if (m >= shamirProtocol.getP()) {
+                System.out.println("m >= p");
+                return;
+            }
+            shamirProtocol.sendMessage(m);
+        } catch (Exception e) {
+            System.out.println("Ошибка ввода");
+            e.printStackTrace();
+        }
+        
     }
 }

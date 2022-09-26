@@ -45,8 +45,8 @@ public class DiffieHellman {
 
     public void calculateKeys() {
         Multiplier multiplier = new Multiplier();
-        yA = multiplier.multiply(Long.valueOf(g), xA, p);
-        yB = multiplier.multiply(Long.valueOf(g), xB, p);
-        z = multiplier.multiply(Long.valueOf(yB), xA, p);
+        yA = multiplier.multiply(g, xA, p);
+        yB = multiplier.multiply(g, xB, p);
+        z = multiplier.multiply(yB, xA, p);
     }
 }

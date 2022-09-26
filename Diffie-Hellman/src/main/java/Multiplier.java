@@ -1,16 +1,19 @@
+import java.math.BigInteger;
+
 public class Multiplier {
-    public Integer multiply(Long base, Integer exponent, Integer module) {
+    public static Integer multiply(Integer base, Integer exponent, Integer module) {
         StringBuffer binaryNotation = new StringBuffer(Integer.toBinaryString(exponent)).reverse();
-        Long res = 1L;
-        Long currentMultiplier = base;
+        BigInteger res = new BigInteger("1");
+        BigInteger currentMultiplier = new BigInteger(String.valueOf(base));
         for (int i = 0; i < binaryNotation.length(); i++) {
             String str = String.valueOf(binaryNotation.charAt(i));
             Integer symbol = Integer.parseInt(str);
             if (symbol.equals(1)) {
-                res = res * currentMultiplier % module;
+                res = res.multiply(currentMultiplier).mod(BigInteger.valueOf(module));
             }
-            currentMultiplier = currentMultiplier * currentMultiplier % module;
+            currentMultiplier = currentMultiplier.multiply(currentMultiplier).mod(BigInteger.valueOf(module));
+           
         }
-        return Math.toIntExact(res);
+        return res.intValue();
     }
 }
