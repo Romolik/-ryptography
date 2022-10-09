@@ -1,18 +1,25 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        RSA rsa = new RSA();
-//        Integer encryptMessage = rsa.encrypt(543);
-//        System.out.println("Алиса присылает зашифровнное сообщение Бобу: " + encryptMessage);
-//        Integer decryptMessage = rsa.decrypt(encryptMessage);
-//        System.out.println("Боб расшифровывает сообщение: " + decryptMessage + ", Исходное сообщение: " + "543");
-        Elgamal elgamal = new Elgamal();
-        List<Integer> list = elgamal.sendMessage(1025);
-        System.out.println("A отправила k: " + list.get(0) + ", x: " + list.get(1));
-        System.out.println("B получил m': " + elgamal.receiveMessage(list.get(0), list.get(1)) +
-                ", Изначальное сообщение: " + 1025);
+        /*MentalPoker mentalPoker = new MentalPoker();
+        List<Integer> list = mentalPoker.sendFirstMessageToB();
+        System.out.println("Алиса прислала Бобу X: ");
+        System.out.println(list);
+        list = mentalPoker.chooseRandomCardToA(list);
+        System.out.println("Боб выбрал карту Алисе: " + list.get(0));
+        System.out.println("Боб вернул Алисе Y: " + list.get(1) + ", " + list.get(2));
+        Integer cardB = mentalPoker.chooseRandomCardToB(list);
+        System.out.println("Алиса выбрала и отправила Бобу карту: " + cardB);
+        mentalPoker.receiveCardToB(cardB);
+        System.out.println("Боб расшифровал свою карту: " + mentalPoker.getCardB());
+        System.out.println("Карта Алисы: " + mentalPoker.getCardA());*/
+        DigitalSignatureRSA digitalSignatureRSA = new DigitalSignatureRSA();
+        List<Integer> list = digitalSignatureRSA.computeSecretPower(500);
+        System.out.println(list);
+        System.out.println(digitalSignatureRSA.verifyAuthenticityKey(list));
     }
 }

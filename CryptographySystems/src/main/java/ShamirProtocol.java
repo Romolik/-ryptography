@@ -13,28 +13,12 @@ public class ShamirProtocol {
 	}
 	
 	private void initializeKeys() {
-		List<Integer> keys = generateKeys();
+		List<Integer> keys = GeneratorKeys.generateKeys(p);
 		cA = keys.get(0);
 		dA = keys.get(1);
-		keys = generateKeys();
+		keys = GeneratorKeys.generateKeys(p);
 		cB = keys.get(0);
 		dB = keys.get(1);
-	}
-	
-	private List<Integer> generateKeys() {
-		Integer c = null;
-		Integer d = null;
-		Integer gcd = 0;
-		while (!gcd.equals(1)) {
-			c = (int) (Math.random() * Integer.MAX_VALUE) % p;
-			if (c % 2 == 0) {
-				c++;
-			}
-			List<Integer> tmp = AdvancedEuclidAlgorithm.findEGCD(p - 1, c);
-			gcd = tmp.get(0);
-			d = (tmp.get(2) + (p - 1)) % (p - 1);
-		}
-		return List.of(c, d);
 	}
 	
 	private Integer sendFirstMessageToB(Integer m) {
